@@ -26,10 +26,10 @@ function Copyright() {
 //styling
 const useStyles = makeStyles(theme => ({
   paper: {
-    marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center"
+    marginTop: theme.spacing(8)
+    // display: "flex",
+    // flexDirection: "column",
+    // alignItems: "flex-start"
   },
   avatar: {
     margin: theme.spacing(1),
@@ -46,13 +46,17 @@ const useStyles = makeStyles(theme => ({
 
 export default function Calculator() {
   const classes = useStyles();
+  //example panel reference  SY4:01:010105:0309:RU42R:001-048 to SY4:01:010050:1109-A:RU41:289-336
+  const [aSide, setASide] = useState("");
+  const [zSide, setZSide] = useState("");
+  const [newPortA, setNewPortA] = useState(null);
+
 
   return (
     <Container component="main" maxWidth="sm">
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>Equinix Logo</Avatar>
-
         <Typography variant="h6">
           1. Paste structured cabling port range below:
         </Typography>
@@ -62,6 +66,8 @@ export default function Calculator() {
               color="secondary"
               name="aSidePortRange"
               variant="outlined"
+              value={aSide}
+              onChange={(e)=> {setASide(e.target.value)}}
               required
               fullWidth
               placeholder="SY4:010050:1109-A..."
@@ -77,6 +83,8 @@ export default function Calculator() {
               color="secondary"
               name="zSidePortRange"
               variant="outlined"
+              value={zSide}
+              onChange={(e)=> {setZSide(e.target.value)}}
               required
               fullWidth
               placeholder="SY4:010010:0123..."
