@@ -70,11 +70,11 @@ export default function Calculator() {
               onChange={(e)=> {setASide(e.target.value)}}
               required
               fullWidth
-              placeholder="SY4:010050:1109-A..."
+              placeholder="SY4:01:010105:0309:RU42R:001-048"
               autoFocus
             />
           </Grid>
-          <Grid item xs={2}>
+          <Grid item xs={1}>
             <Typography variant="h6"> TO </Typography>
           </Grid>
 
@@ -87,7 +87,7 @@ export default function Calculator() {
               onChange={(e)=> {setZSide(e.target.value)}}
               required
               fullWidth
-              placeholder="SY4:010010:0123..."
+              placeholder="SY4:01:010050:1109-A:RU41:289-336"
             />
           </Grid>
         </Grid>
@@ -103,7 +103,7 @@ export default function Calculator() {
               fullWidth
             />
           </Grid>
-          <Grid item xs={2}>
+          <Grid item xs={1}>
             <Typography variant="h6"> TO </Typography>
           </Grid>
 
@@ -137,7 +137,7 @@ export default function Calculator() {
               fullWidth
             />
           </Grid>
-          <Grid item xs={2}>
+          <Grid item xs={1}>
             <Typography variant="h6"> TO </Typography>
           </Grid>
 
@@ -180,7 +180,7 @@ export default function Calculator() {
               fullWidth
             />
           </Grid>
-          <Grid item xs={2}>
+          <Grid item xs={1}>
             <Typography variant="h6"> TO </Typography>
           </Grid>
 
