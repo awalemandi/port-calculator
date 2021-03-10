@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -23,6 +23,7 @@ function Copyright() {
   );
 }
 
+//styling
 const useStyles = makeStyles(theme => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -47,70 +48,149 @@ export default function Calculator() {
   const classes = useStyles();
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="sm">
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>Equinix Logo</Avatar>
-        <Typography component="h2" variant="h5">
-          Enter Port Range
+
+        <Typography variant="h6">
+          1. Paste structured cabling port range below:
         </Typography>
         <Grid container spacing={2}>
-          <Grid item xs={4}>
+          <Grid item xs={5}>
             <TextField
               color="secondary"
-              autoComplete="port"
-              name="firstPort"
+              name="aSidePortRange"
               variant="outlined"
               required
               fullWidth
-              id="firstPort"
-              placeholder="1"
+              placeholder="SY4:010050:1109-A..."
               autoFocus
             />
           </Grid>
-          <Grid item xs={4}>
-            <Typography variant="h6">becomes</Typography>
+          <Grid item xs={2}>
+            <Typography variant="h6"> TO </Typography>
           </Grid>
-          <Grid item xs={4}>
+
+          <Grid item xs={5}>
             <TextField
               color="secondary"
+              name="zSidePortRange"
               variant="outlined"
               required
               fullWidth
-              id="lastPort"
-              name="lastPort"
-              placeholder="49"
+              placeholder="SY4:010010:0123..."
             />
           </Grid>
         </Grid>
-        <Typography component="h2" variant="h5">
-          Port to calculate
-        </Typography>
+
+        <Typography variant="h6">Port Range Template:</Typography>
+        <Typography variant="h7">Patch Panel:</Typography>
         <Grid container spacing={2}>
-          <Grid item xs={4}>
+          <Grid item xs={5}>
             <TextField
               color="secondary"
-              autoComplete="port"
-              name="firstPort"
+              name="aSidePP"
               variant="outlined"
-              required
               fullWidth
-              id="firstPort"
-              placeholder="29"
-              autoFocus
             />
           </Grid>
-          <Grid item xs={4}>
-            <Typography variant="h6">becomes</Typography>
+          <Grid item xs={2}>
+            <Typography variant="h6"> TO </Typography>
           </Grid>
-          <Grid item xs={4}>
+
+          <Grid item xs={5}>
+            <TextField
+              color="secondary"
+              name="zSidePP"
+              variant="outlined"
+              fullWidth
+            />
+          </Grid>
+        </Grid>
+
+        <Typography variant="h7">Ports:</Typography>
+
+        <Grid container spacing={2}>
+          <Grid item xs={2}>
+            <TextField
+              color="secondary"
+              name="aSidePortA"
+              variant="outlined"
+              fullWidth
+            />
+          </Grid>
+          <Typography variant="h6"> + </Typography>
+          <Grid item xs={2}>
+            <TextField
+              color="secondary"
+              name="aSidePortB"
+              variant="outlined"
+              fullWidth
+            />
+          </Grid>
+          <Grid item xs={2}>
+            <Typography variant="h6"> TO </Typography>
+          </Grid>
+
+          <Grid item xs={2}>
+            <TextField
+              color="secondary"
+              name="zSidePortA"
+              variant="outlined"
+              fullWidth
+            />
+          </Grid>
+          <Typography variant="h6"> + </Typography>
+          <Grid item xs={2}>
+            <TextField
+              color="secondary"
+              name="zSidePortB"
+              variant="outlined"
+              fullWidth
+            />
+          </Grid>
+        </Grid>
+
+        <Typography variant="h6">2. Enter Port A to be calculated:</Typography>
+
+        <Grid container spacing={2}>
+          <Grid item xs={2}>
+            <TextField
+              color="secondary"
+              name="aSidePortA"
+              variant="outlined"
+              fullWidth
+            />
+          </Grid>
+          <Typography variant="h6"> + </Typography>
+          <Grid item xs={2}>
             <TextField
               color="primary"
+              name="aSidePortB"
               variant="outlined"
-              required
               fullWidth
-              id="lastPort"
-              name="lastPort"
+            />
+          </Grid>
+          <Grid item xs={2}>
+            <Typography variant="h6"> TO </Typography>
+          </Grid>
+
+          <Grid item xs={2}>
+            <TextField
+              color="primary"
+              name="zSidePortA"
+              variant="outlined"
+              fullWidth
+            />
+          </Grid>
+          <Typography variant="h6"> + </Typography>
+          <Grid item xs={2}>
+            <TextField
+              color="primary"
+              name="zSidePortB"
+              variant="outlined"
+              fullWidth
             />
           </Grid>
         </Grid>
