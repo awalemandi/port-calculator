@@ -44,6 +44,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+//Regex
+const patchPanel = /(\d{3}-\d{3})/g
+
 export default function Calculator() {
   const classes = useStyles();
   //example panel reference  SY4:01:010105:0309:RU42R:001-048 to SY4:01:010050:1109-A:RU41:289-336
