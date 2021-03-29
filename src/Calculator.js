@@ -45,14 +45,23 @@ const useStyles = makeStyles(theme => ({
 }));
 
 //Regex
-const patchPanel = /(\d{3}-\d{3})/g
+const patchPanel = /(\d{3}-\d{3})/g;
+
+//function to remove ports from input and return patch panel
+const getPatchpanel = input => {
+  //SY4:01:010105:0309:RU42R:001-048 
+  //regex  = colon+numberx3 dash numberx3
+
+} ;
 
 export default function Calculator() {
   const classes = useStyles();
   //example panel reference  SY4:01:010105:0309:RU42R:001-048 to SY4:01:010050:1109-A:RU41:289-336
   const [aSide, setASide] = useState("");
   const [zSide, setZSide] = useState("");
-  const [newPortA, setNewPortA] = useState(null);
+  const [aSidePatchpanel, setAsidePatchpanel] = useState("");
+  const [zSidePatchpanel, setZsidePatchpanel] = useState("");
+
 
 
   return (
@@ -70,7 +79,9 @@ export default function Calculator() {
               name="aSidePortRange"
               variant="outlined"
               value={aSide}
-              onChange={(e)=> {setASide(e.target.value)}}
+              onChange={e => {
+                setASide(e.target.value);
+              }}
               required
               fullWidth
               placeholder="SY4:01:010105:0309:RU42R:001-048"
@@ -87,7 +98,9 @@ export default function Calculator() {
               name="zSidePortRange"
               variant="outlined"
               value={zSide}
-              onChange={(e)=> {setZSide(e.target.value)}}
+              onChange={e => {
+                setZSide(e.target.value);
+              }}
               required
               fullWidth
               placeholder="SY4:01:010050:1109-A:RU41:289-336"
@@ -101,8 +114,9 @@ export default function Calculator() {
           <Grid item xs={5}>
             <TextField
               color="secondary"
-              name="aSidePP"
+              name="aSidePatchpanel"
               variant="outlined"
+              disabled
               fullWidth
             />
           </Grid>
@@ -113,9 +127,10 @@ export default function Calculator() {
           <Grid item xs={5}>
             <TextField
               color="secondary"
-              name="zSidePP"
+              name="zSidePatchpanel"
               variant="outlined"
               fullWidth
+              disabled
             />
           </Grid>
         </Grid>
@@ -129,15 +144,17 @@ export default function Calculator() {
               name="aSidePortA"
               variant="outlined"
               fullWidth
+              disabled
             />
           </Grid>
-          <Typography variant="h6"> + </Typography>
+          <Typography variant="h6"> - </Typography>
           <Grid item xs={2}>
             <TextField
               color="secondary"
               name="aSidePortB"
               variant="outlined"
               fullWidth
+              disabled
             />
           </Grid>
           <Grid item xs={1}>
@@ -150,15 +167,17 @@ export default function Calculator() {
               name="zSidePortA"
               variant="outlined"
               fullWidth
+              disabled
             />
           </Grid>
-          <Typography variant="h6"> + </Typography>
+          <Typography variant="h6"> - </Typography>
           <Grid item xs={2}>
             <TextField
               color="secondary"
               name="zSidePortB"
               variant="outlined"
               fullWidth
+              disabled
             />
           </Grid>
         </Grid>
