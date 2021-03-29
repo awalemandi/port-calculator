@@ -49,10 +49,11 @@ const patchPanel = /(\d{3}-\d{3})/g;
 
 //function to remove ports from input and return patch panel
 const getPatchpanel = input => {
-  //SY4:01:010105:0309:RU42R:001-048 
+  //SY4:01:010105:0309:RU42R:001-048
   //regex  = colon+numberx3 dash numberx3
-
-} ;
+  //input.replace(ports match with ':')
+  //return patch panel string
+};
 
 export default function Calculator() {
   const classes = useStyles();
@@ -61,8 +62,6 @@ export default function Calculator() {
   const [zSide, setZSide] = useState("");
   const [aSidePatchpanel, setAsidePatchpanel] = useState("");
   const [zSidePatchpanel, setZsidePatchpanel] = useState("");
-
-
 
   return (
     <Container component="main" maxWidth="sm">
