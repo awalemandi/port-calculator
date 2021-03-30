@@ -1,13 +1,17 @@
-import React, { useState } from "react";
-import Avatar from "@material-ui/core/Avatar";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
+import React, { useState, useEffect } from "react";
+import { portRegex } from "./Regex";
+
+import {
+  Avatar,
+  CssBaseline,
+  TextField,
+  Link,
+  Grid,
+  Box,
+  Typography,
+  makeStyles,
+  Container
+} from "@material-ui/core";
 
 //copyright
 function Copyright() {
@@ -44,24 +48,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-//Regex
-const patchPanel = /(\d{3}-\d{3})/g;
-
-//function to remove ports from input and return patch panel
-const getPatchpanel = input => {
-  //SY4:01:010105:0309:RU42R:001-048
-  //regex  = colon+numberx3 dash numberx3
-  //input.replace(ports match with ':')
-  //return patch panel string
-};
-
 export default function Calculator() {
   const classes = useStyles();
   //example panel reference  SY4:01:010105:0309:RU42R:001-048 to SY4:01:010050:1109-A:RU41:289-336
   const [aSide, setASide] = useState("");
   const [zSide, setZSide] = useState("");
-  const [aSidePatchpanel, setAsidePatchpanel] = useState("");
-  const [zSidePatchpanel, setZsidePatchpanel] = useState("");
+  const [aSidePatchpanel, setAsidePatchpanel] = useState("sdfasf");
+  const [zSidePatchpanel, setZsidePatchpanel] = useState("dsfsadf");
 
   return (
     <Container component="main" maxWidth="sm">
@@ -115,6 +108,7 @@ export default function Calculator() {
               color="secondary"
               name="aSidePatchpanel"
               variant="outlined"
+              value={aSidePatchpanel}
               disabled
               fullWidth
             />
@@ -128,6 +122,7 @@ export default function Calculator() {
               color="secondary"
               name="zSidePatchpanel"
               variant="outlined"
+              value={zSidePatchpanel}
               fullWidth
               disabled
             />
