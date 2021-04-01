@@ -1,4 +1,4 @@
-export const portRegex = /^[0-9]+-[0-9]+$/i;
+export const portRangeRegex = /([0-9]+-[0-9]+)$/i;
 
 
 //function to return the regex match as string
