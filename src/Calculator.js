@@ -55,10 +55,8 @@ export default function Calculator() {
   //Initialize states
   const [portRange, setPortRange] = useState("");
   const [sidesArray, setSidesArray] = useState(['A side', 'Z side']);
-  const [aSide, setASide] = useState("");
-  const [zSide, setZSide] = useState("");
-  const [aSidePatchpanel, setAsidePatchpanel] = useState("");
-  const [zSidePatchpanel, setZsidePatchpanel] = useState("");
+  const [aSidePatchpanel, setAsidePatchpanel] = useState("A side PP");
+  const [zSidePatchpanel, setZsidePatchpanel] = useState("Z side PP");
   const [oldAsidePorts, setOldAsidePorts] = useState([0, 0]);
   const [oldZsidePorts, setOldZsidePorts] = useState([0, 0]);
   const [newAsidePorts, setNewAsidePorts] = useState([0, 0]);
@@ -110,7 +108,7 @@ export default function Calculator() {
               color="secondary"
               name="zSidePortRange"
               variant="outlined"
-              value={zSide}
+              value={sidesArray[1]}
               required
               fullWidth
               disabled
