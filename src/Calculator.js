@@ -55,6 +55,10 @@ export default function Calculator() {
   const [zSide, setZSide] = useState("");
   const [aSidePatchpanel, setAsidePatchpanel] = useState("sdfasf");
   const [zSidePatchpanel, setZsidePatchpanel] = useState("dsfsadf");
+  const [oldAsidePorts, setOldAsidePorts] = useState([0, 0]);
+  const [oldZsidePorts, setOldZsidePorts] = useState([0, 0]);
+  const [newAsidePorts, setNewAsidePorts] = useState([0, 0]);
+  const [newZsidePorts, setNewZsidePorts] = useState([0, 0]);
 
   return (
     <Container component="main" maxWidth="sm">

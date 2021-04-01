@@ -1,5 +1,7 @@
 export const portRangeRegex = /([0-9]+-[0-9]+)$/i;
 
+//for patch panel, replace portRange with '' in 
+
 
 //function to return the regex match as string
 export const getRegexMatch = (regex, inputString) => {
