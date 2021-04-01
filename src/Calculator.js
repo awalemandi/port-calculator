@@ -53,6 +53,7 @@ export default function Calculator() {
   //example panel reference  SY4:01:010105:0309:RU42R:001-048 to SY4:01:010050:1109-A:RU41:289-336
 
   //Initialize states
+  const [portRange, setPortRange] = useState("");
   const [aSide, setASide] = useState("");
   const [zSide, setZSide] = useState("");
   const [aSidePatchpanel, setAsidePatchpanel] = useState("");
@@ -71,19 +72,35 @@ export default function Calculator() {
           1. Paste structured cabling port range below:
         </Typography>
         <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <TextField
+              color="secondary"
+              name="portRange"
+              variant="outlined"
+              // value={aSide}
+              // onChange={e => {
+              //   setASide(e.target.value);
+              // }}
+              required
+              fullWidth
+              placeholder="SY4:01:010105:0309:RU42R:001-048 to SY4:01:010050:1109-A:RU41:289-336"
+              autoFocus
+            />
+          </Grid>
           <Grid item xs={5}>
             <TextField
               color="secondary"
               name="aSidePortRange"
               variant="outlined"
               value={aSide}
-              onChange={e => {
-                setASide(e.target.value);
-              }}
+              // onChange={e => {
+              //   setASide(e.target.value);
+              // }}
               required
               fullWidth
-              placeholder="SY4:01:010105:0309:RU42R:001-048"
-              autoFocus
+              // placeholder="SY4:01:010105:0309:RU42R:001-048"
+              // autoFocus
+              disabled
             />
           </Grid>
           <Grid item xs={1}>
@@ -96,12 +113,13 @@ export default function Calculator() {
               name="zSidePortRange"
               variant="outlined"
               value={zSide}
-              onChange={e => {
-                setZSide(e.target.value);
-              }}
+              // onChange={e => {
+              //   setZSide(e.target.value);
+              // }}
               required
               fullWidth
-              placeholder="SY4:01:010050:1109-A:RU41:289-336"
+              // placeholder="SY4:01:010050:1109-A:RU41:289-336"
+              disabled
             />
           </Grid>
         </Grid>
