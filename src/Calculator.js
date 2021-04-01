@@ -51,10 +51,12 @@ const useStyles = makeStyles(theme => ({
 export default function Calculator() {
   const classes = useStyles();
   //example panel reference  SY4:01:010105:0309:RU42R:001-048 to SY4:01:010050:1109-A:RU41:289-336
+
+  //Initialize states
   const [aSide, setASide] = useState("");
   const [zSide, setZSide] = useState("");
-  const [aSidePatchpanel, setAsidePatchpanel] = useState("sdfasf");
-  const [zSidePatchpanel, setZsidePatchpanel] = useState("dsfsadf");
+  const [aSidePatchpanel, setAsidePatchpanel] = useState("");
+  const [zSidePatchpanel, setZsidePatchpanel] = useState("");
   const [oldAsidePorts, setOldAsidePorts] = useState([0, 0]);
   const [oldZsidePorts, setOldZsidePorts] = useState([0, 0]);
   const [newAsidePorts, setNewAsidePorts] = useState([0, 0]);
@@ -103,7 +105,6 @@ export default function Calculator() {
             />
           </Grid>
         </Grid>
-
         <Typography variant="h6">Port Range Template:</Typography>
         <Typography variant="h7">Patch Panel:</Typography>
         <Grid container spacing={2}>
@@ -132,15 +133,14 @@ export default function Calculator() {
             />
           </Grid>
         </Grid>
-
         <Typography variant="h7">Ports:</Typography>
-
         <Grid container spacing={2}>
           <Grid item xs={2}>
             <TextField
               color="secondary"
               name="aSidePortA"
               variant="outlined"
+              value={oldAsidePorts[0]}
               fullWidth
               disabled
             />
@@ -151,6 +151,7 @@ export default function Calculator() {
               color="secondary"
               name="aSidePortB"
               variant="outlined"
+              value={oldAsidePorts[1]}
               fullWidth
               disabled
             />
@@ -164,6 +165,7 @@ export default function Calculator() {
               color="secondary"
               name="zSidePortA"
               variant="outlined"
+              value={oldZsidePorts[0]}
               fullWidth
               disabled
             />
@@ -174,20 +176,20 @@ export default function Calculator() {
               color="secondary"
               name="zSidePortB"
               variant="outlined"
+              value={oldZsidePorts[1]}
               fullWidth
               disabled
             />
           </Grid>
         </Grid>
-
         <Typography variant="h6">2. Enter Port A to be calculated:</Typography>
-
         <Grid container spacing={2}>
           <Grid item xs={2}>
             <TextField
               color="secondary"
               name="aSidePortA"
               variant="outlined"
+              value={newAsidePorts[0]}
               fullWidth
             />
           </Grid>
@@ -197,6 +199,7 @@ export default function Calculator() {
               color="primary"
               name="aSidePortB"
               variant="outlined"
+              value={newAsidePorts[1]}
               fullWidth
             />
           </Grid>
@@ -209,6 +212,7 @@ export default function Calculator() {
               color="primary"
               name="zSidePortA"
               variant="outlined"
+              value={newZsidePorts[0]}
               fullWidth
             />
           </Grid>
@@ -218,6 +222,7 @@ export default function Calculator() {
               color="primary"
               name="zSidePortB"
               variant="outlined"
+              value={newZsidePorts[1]}
               fullWidth
             />
           </Grid>
