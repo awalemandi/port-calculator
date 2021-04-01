@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { portRegex } from "./Regex";
+import { rangeSeparatorRegex, portRangeRegex, getSides, getRegexMatch } from "./Regex";
 
 import {
   Avatar,
@@ -57,11 +57,16 @@ export default function Calculator() {
   const [sidesArray, setSidesArray] = useState(['A side', 'Z side']);
   const [aSidePatchpanel, setAsidePatchpanel] = useState("A side PP");
   const [zSidePatchpanel, setZsidePatchpanel] = useState("Z side PP");
-  const [oldAsidePorts, setOldAsidePorts] = useState([0, 0]);
-  const [oldZsidePorts, setOldZsidePorts] = useState([0, 0]);
-  const [newAsidePorts, setNewAsidePorts] = useState([0, 0]);
-  const [newZsidePorts, setNewZsidePorts] = useState([0, 0]);
+  const [oldAsidePorts, setOldAsidePorts] = useState(['000', '000']);
+  const [oldZsidePorts, setOldZsidePorts] = useState(['000', '000']);
+  const [newAsidePorts, setNewAsidePorts] = useState(['000', '000']);
+  const [newZsidePorts, setNewZsidePorts] = useState(['000', '000']);
 
+  const handleRangeChange = (e) => {
+    setPortRange(e.target.value);
+    // let sides = getSides(rangeSeparatorRegex, portRange);
+    // setSidesArray(sides);
+  }
   return (
     <Container component="main" maxWidth="sm">
       <CssBaseline />
