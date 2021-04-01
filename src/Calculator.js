@@ -68,38 +68,35 @@ export default function Calculator() {
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>Equinix Logo</Avatar>
-        <Typography variant="h6">
-          1. Paste structured cabling port range below:
-        </Typography>
         <Grid container spacing={2}>
+          <Typography variant="h6">
+            1. Paste structured cabling port range below:
+          </Typography>
           <Grid item xs={12}>
             <TextField
               color="secondary"
               name="portRange"
               variant="outlined"
-              // value={aSide}
-              // onChange={e => {
-              //   setASide(e.target.value);
-              // }}
+              value={portRange}
+              onChange={e => {
+                setPortRange(e.target.value);
+              }}
               required
               fullWidth
               placeholder="SY4:01:010105:0309:RU42R:001-048 to SY4:01:010050:1109-A:RU41:289-336"
               autoFocus
             />
           </Grid>
+          <Typography variant="h6">Port Range Template:</Typography>
+          <Typography variant="h7">A and Z sides:</Typography>
           <Grid item xs={5}>
             <TextField
               color="secondary"
               name="aSidePortRange"
               variant="outlined"
               value={aSide}
-              // onChange={e => {
-              //   setASide(e.target.value);
-              // }}
               required
               fullWidth
-              // placeholder="SY4:01:010105:0309:RU42R:001-048"
-              // autoFocus
               disabled
             />
           </Grid>
@@ -113,19 +110,14 @@ export default function Calculator() {
               name="zSidePortRange"
               variant="outlined"
               value={zSide}
-              // onChange={e => {
-              //   setZSide(e.target.value);
-              // }}
               required
               fullWidth
-              // placeholder="SY4:01:010050:1109-A:RU41:289-336"
               disabled
             />
           </Grid>
         </Grid>
-        <Typography variant="h6">Port Range Template:</Typography>
-        <Typography variant="h7">Patch Panel:</Typography>
         <Grid container spacing={2}>
+          <Typography variant="h7">Patch Panel:</Typography>
           <Grid item xs={5}>
             <TextField
               color="secondary"
