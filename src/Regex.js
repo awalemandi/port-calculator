@@ -3,7 +3,7 @@ export const rangeSeparatorRegex = / to /gim;
 export const portRangeRegex = /([0-9]+-[0-9]+)$/i;
 
 //fucntion to return array of A and Z sides from a range(string)
-const getSides = (regex, range) => {
+export const getSides = (regex, range) => {
   if (regex.test(range)) {
     return range.split(regex);
   } else {

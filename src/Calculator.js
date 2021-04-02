@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   rangeSeparatorRegex,
   portRangeRegex,
-  
+  getSides,
   getRegexMatch
 } from "./Regex";
 
@@ -17,15 +17,6 @@ import {
   makeStyles,
   Container
 } from "@material-ui/core";
-
-const getSides = (regex, range) => {
-  if (regex.test(range)) {
-    return range.split(regex);
-  } else {
-    console.log(`Range template invalid!`);
-    return;
-  }
-};
 
 //copyright
 function Copyright() {
