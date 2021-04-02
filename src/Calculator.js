@@ -94,7 +94,7 @@ export default function Calculator() {
   }, [portRange]);
 
   return (
-    <Container component="main" maxWidth="sm">
+    <Container component="main" maxWidth="md">
       <CssBaseline />
       <div className={classes.paper}>
         <Grid container spacing={2}>
