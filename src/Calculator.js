@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   rangeSeparatorRegex,
   portRangeRegex,
-  getSides,
+  
   getRegexMatch
 } from "./Regex";
 
@@ -17,6 +17,15 @@ import {
   makeStyles,
   Container
 } from "@material-ui/core";
+
+const getSides = (regex, range) => {
+  if (regex.test(range)) {
+    return range.split(regex);
+  } else {
+    console.log(`Range template invalid!`);
+    return;
+  }
+};
 
 //copyright
 function Copyright() {
@@ -69,19 +78,17 @@ export default function Calculator() {
 
   const handleRangeChange = e => {
     setPortRange(e.target.value);
-    // setSidesArray(getSides(rangeSeparatorRegex, portRange));
-    setSidesArray(['updated A', 'updated Z']);
-    console.log(portRange);
   };
 
-  // const setSideState = () => {
-  //   if (portRange == "") return;
-  //   let sides = getSides(rangeSeparatorRegex, portRange);
-  //   setSidesArray(sides);
-  // };
+  const updateSides =() => {
+    let updatedSidesArray = getSides(rangeSeparatorRegex, portRange);
+    if (updatedSidesArray) {
+      setSidesArray(updatedSidesArray);
+    }
+  };
 
   useEffect(() => {
-    // setSideState();
+    updateSides();
   }, [portRange]);
 
   return (
