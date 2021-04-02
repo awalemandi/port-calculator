@@ -5,8 +5,7 @@ export const portRangeRegex = /([0-9]+-[0-9]+)$/i;
 //fucntion to return array of A and Z sides from a range(string)
 const getSides = (regex, range) => {
   if (regex.test(range)) {
-    let sidesArray = range.split(regex);
-    return sidesArray;
+    return range.split(regex);
   } else {
     console.log(`Range template invalid!`);
     return;

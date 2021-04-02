@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { rangeSeparatorRegex, portRangeRegex, getSides, getRegexMatch } from "./Regex";
+import {
+  rangeSeparatorRegex,
+  portRangeRegex,
+  getSides,
+  getRegexMatch
+} from "./Regex";
 
 import {
   Avatar,
@@ -54,45 +59,63 @@ export default function Calculator() {
 
   //Initialize states
   const [portRange, setPortRange] = useState("");
-  const [sidesArray, setSidesArray] = useState(['A side', 'Z side']);
+  const [sidesArray, setSidesArray] = useState(["A side", "Z side"]);
   const [aSidePatchpanel, setAsidePatchpanel] = useState("A side PP");
   const [zSidePatchpanel, setZsidePatchpanel] = useState("Z side PP");
-  const [oldAsidePorts, setOldAsidePorts] = useState(['000', '000']);
-  const [oldZsidePorts, setOldZsidePorts] = useState(['000', '000']);
-  const [newAsidePorts, setNewAsidePorts] = useState(['000', '000']);
-  const [newZsidePorts, setNewZsidePorts] = useState(['000', '000']);
+  const [oldAsidePorts, setOldAsidePorts] = useState(["000", "000"]);
+  const [oldZsidePorts, setOldZsidePorts] = useState(["000", "000"]);
+  const [newAsidePorts, setNewAsidePorts] = useState(["000", "000"]);
+  const [newZsidePorts, setNewZsidePorts] = useState(["000", "000"]);
 
-  const handleRangeChange = (e) => {
+  const handleRangeChange = e => {
     setPortRange(e.target.value);
-    // let sides = getSides(rangeSeparatorRegex, portRange);
-    // setSidesArray(sides);
-  }
+    // setSidesArray(getSides(rangeSeparatorRegex, portRange));
+    setSidesArray(['updated A', 'updated Z']);
+    console.log(portRange);
+  };
+
+  // const setSideState = () => {
+  //   if (portRange == "") return;
+  //   let sides = getSides(rangeSeparatorRegex, portRange);
+  //   setSidesArray(sides);
+  // };
+
+  useEffect(() => {
+    // setSideState();
+  }, [portRange]);
+
   return (
     <Container component="main" maxWidth="sm">
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>Equinix Logo</Avatar>
         <Grid container spacing={2}>
-          <Typography variant="h6">
-            1. Paste structured cabling port range below:
-          </Typography>
+          <Grid item xs={12}>
+            <Avatar className={classes.avatar}>Equinix Logo</Avatar>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant="h6">
+              1. Paste structured cabling port range below:
+            </Typography>
+          </Grid>
           <Grid item xs={12}>
             <TextField
               color="secondary"
               name="portRange"
               variant="outlined"
               value={portRange}
-              onChange={e => {
-                setPortRange(e.target.value);
-              }}
+              onChange={handleRangeChange}
               required
               fullWidth
               placeholder="SY4:01:010105:0309:RU42R:001-048 to SY4:01:010050:1109-A:RU41:289-336"
               autoFocus
             />
           </Grid>
-          <Typography variant="h6">Port Range Template:</Typography>
-          <Typography variant="h7">A and Z sides:</Typography>
+          <Grid item xs={12}>
+            <Typography variant="h6">Port Range Template:</Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant="h7">A and Z sides:</Typography>
+          </Grid>
           <Grid item xs={5}>
             <TextField
               color="secondary"
@@ -121,7 +144,9 @@ export default function Calculator() {
           </Grid>
         </Grid>
         <Grid container spacing={2}>
-          <Typography variant="h7">Patch Panel:</Typography>
+          <Grid item xs={12}>
+            <Typography variant="h7">Patch Panel:</Typography>
+          </Grid>
           <Grid item xs={5}>
             <TextField
               color="secondary"
@@ -147,8 +172,11 @@ export default function Calculator() {
             />
           </Grid>
         </Grid>
-        <Typography variant="h7">Ports:</Typography>
+
         <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <Typography variant="h7">Ports:</Typography>
+          </Grid>
           <Grid item xs={2}>
             <TextField
               color="secondary"
@@ -196,8 +224,13 @@ export default function Calculator() {
             />
           </Grid>
         </Grid>
-        <Typography variant="h6">2. Enter Port A to be calculated:</Typography>
+
         <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <Typography variant="h6">
+              2. Enter Port A to be calculated:
+            </Typography>
+          </Grid>
           <Grid item xs={2}>
             <TextField
               color="secondary"
