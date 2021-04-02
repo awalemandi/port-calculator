@@ -1,4 +1,5 @@
 export const rangeSeparatorRegex = / to /gim;
+export const portsSeparatorRegex = /-/gim;
 
 export const portRangeRegex = /([0-9]+-[0-9]+)$/i;
 

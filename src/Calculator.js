@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
   rangeSeparatorRegex,
+  portsSeparatorRegex,
   portRangeRegex,
   getSides,
   getPatchpanel,
@@ -23,10 +24,11 @@ import {
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="">
-        Equinix Port Calculator
-      </Link>{" "}
+      {"Created by "}
+      <Link color="inherit" href="https://github.com/awalemandi">
+        awalemandi
+      </Link>
+      {" for Equinix Australia "}
       {new Date().getFullYear()}
       {"."}
     </Typography>
@@ -77,27 +79,39 @@ export default function Calculator() {
     setZsidePatchpanel(zSide);
   };
 
-  const updateSides =() => {
+  const updatePorts = (aPorts, zPorts) => {
+    setOldAsidePorts(aPorts);
+    setOldZsidePorts(zPorts);
+  };
+
+  const updateSides = () => {
     let updatedSidesArray = getSides(rangeSeparatorRegex, portRange);
     if (updatedSidesArray) {
       setSidesArray(updatedSidesArray);
-      let updatedAside = getPatchpanel(portRangeRegex, updatedSidesArray[0]);
-      let updatedZside = getPatchpanel(portRangeRegex, updatedSidesArray[1]);
+
+      const updatedAside = getPatchpanel(portRangeRegex, updatedSidesArray[0]);
+      const updatedZside = getPatchpanel(portRangeRegex, updatedSidesArray[1]);
       updatePatchpanels(updatedAside, updatedZside);
+
+      const updatedAportRange = getRegexMatch(portRangeRegex, updatedSidesArray[0]);
+      const updatedZportsRange = getRegexMatch(portRangeRegex, updatedSidesArray[1]);
+
+      const updatedAportsArray = getSides(portsSeparatorRegex, updatedAportRange);
+      const updatedZportsArray = getSides(portsSeparatorRegex, updatedZportsRange);
+      console.log(updatedAportsArray, updatedZportsArray);
+      // updatePorts(updatedAportsArray, updatedZportsArray);
     }
   };
 
-
   useEffect(() => {
     updateSides();
- 
   }, [portRange]);
 
   return (
     <Container component="main" maxWidth="md">
       <CssBaseline />
       <div className={classes.paper}>
-        <Grid container spacing={2}>
+        <Grid container spacing={1}>
           <Grid item xs={12}>
             <Avatar className={classes.avatar}>Equinix Logo</Avatar>
           </Grid>
