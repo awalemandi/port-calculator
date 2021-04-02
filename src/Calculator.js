@@ -69,6 +69,7 @@ export default function Calculator() {
   const [oldZsidePorts, setOldZsidePorts] = useState(["000", "000"]);
   const [newAsidePorts, setNewAsidePorts] = useState(["000", "000"]);
   const [newZsidePorts, setNewZsidePorts] = useState(["000", "000"]);
+  const [portDifference, setPortDifference] = useState(0);
 
   const handleRangeChange = e => {
     setPortRange(e.target.value);
@@ -91,20 +92,28 @@ export default function Calculator() {
 
       const updatedAside = getPatchpanel(portRangeRegex, updatedSidesArray[0]);
       const updatedZside = getPatchpanel(portRangeRegex, updatedSidesArray[1]);
+
       updatePatchpanels(updatedAside, updatedZside);
 
       const updatedAportRange = getRegexMatch(portRangeRegex, updatedSidesArray[0]);
-      const updatedZportsRange = getRegexMatch(portRangeRegex, updatedSidesArray[1]);
+      const updatedZportRange = getRegexMatch(portRangeRegex, updatedSidesArray[1]);
 
       const updatedAportsArray = getSides(portsSeparatorRegex, updatedAportRange);
-      const updatedZportsArray = getSides(portsSeparatorRegex, updatedZportsRange);
-      console.log(updatedAportsArray, updatedZportsArray);
-      // updatePorts(updatedAportsArray, updatedZportsArray);
+      const updatedZportsArray = getSides(/-/gim, updatedZportRange);
+    
+      updatePorts(updatedAportsArray, updatedZportsArray);
+
+      calculatePortDifference(updatedAportsArray[0], updatedZportsArray[0]);
     }
   };
 
+  const calculatePortDifference = (a, b) => {
+    setPortDifference(Math.abs(parseInt(a)-parseInt(b)));
+  }
+
   useEffect(() => {
     updateSides();
+    calculatePortDifference();
   }, [portRange]);
 
   return (
@@ -114,6 +123,7 @@ export default function Calculator() {
         <Grid container spacing={1}>
           <Grid item xs={12}>
             <Avatar className={classes.avatar}>Equinix Logo</Avatar>
+            {portDifference}
           </Grid>
           <Grid item xs={12}>
             <Typography variant="h6">
@@ -260,6 +270,7 @@ export default function Calculator() {
               name="aSidePortA"
               variant="outlined"
               value={newAsidePorts[0]}
+              type="number"
               fullWidth
             />
           </Grid>
@@ -270,6 +281,7 @@ export default function Calculator() {
               name="aSidePortB"
               variant="outlined"
               value={newAsidePorts[1]}
+              type="number"
               fullWidth
             />
           </Grid>
