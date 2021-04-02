@@ -13,6 +13,13 @@ export const getSides = (regex, range) => {
 };
 
 //for patch panel, replace portRange with '' in
+export const getPatchpanel = (regex, side) => {
+  if (!regex.test(side)) {
+    console.log('side template not matched!');
+    return;
+  };
+  return side.replace(regex, '');
+}
 
 //function to return the regex match as string
 export const getRegexMatch = (regex, inputString) => {

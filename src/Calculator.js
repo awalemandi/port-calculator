@@ -3,6 +3,7 @@ import {
   rangeSeparatorRegex,
   portRangeRegex,
   getSides,
+  getPatchpanel,
   getRegexMatch
 } from "./Regex";
 
@@ -71,15 +72,25 @@ export default function Calculator() {
     setPortRange(e.target.value);
   };
 
+  const updatePatchpanels = (aSide, zSide) => {
+    setAsidePatchpanel(aSide);
+    setZsidePatchpanel(zSide);
+  };
+
   const updateSides =() => {
     let updatedSidesArray = getSides(rangeSeparatorRegex, portRange);
     if (updatedSidesArray) {
       setSidesArray(updatedSidesArray);
+      let updatedAside = getPatchpanel(portRangeRegex, updatedSidesArray[0]);
+      let updatedZside = getPatchpanel(portRangeRegex, updatedSidesArray[1]);
+      updatePatchpanels(updatedAside, updatedZside);
     }
   };
 
+
   useEffect(() => {
     updateSides();
+ 
   }, [portRange]);
 
   return (
