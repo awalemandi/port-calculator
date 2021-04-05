@@ -142,7 +142,7 @@ export default function Calculator() {
     } catch (e) {
       console.log(e);
     }
-  }, [portRange]);
+  }, [portRange, oldAsidePorts]);
 
   return (
     <Container component="main" maxWidth="md">
