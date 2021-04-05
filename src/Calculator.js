@@ -125,14 +125,12 @@ export default function Calculator() {
 
   const handlePortAChange = e => {
     const input = parseInt(e.target.value);
-    // if (!input) return;
     setNewPortA(input);
     setNewPortB(input + 1);
   };
 
   const handlePortBChange = e => {
     const input = parseInt(e.target.value);
-    // if (!input) return;
     setNewPortB(input);
     setNewPortA(input - 1);
   };
