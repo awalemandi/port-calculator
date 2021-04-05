@@ -85,7 +85,7 @@ export default function Calculator() {
     setOldZsidePorts(zPorts);
   };
 
-  const updateSides = () => {
+  const updateFields = () => {
     let updatedSidesArray = getSides(rangeSeparatorRegex, portRange);
     if (updatedSidesArray) {
       setSidesArray(updatedSidesArray);
@@ -95,25 +95,39 @@ export default function Calculator() {
 
       updatePatchpanels(updatedAside, updatedZside);
 
-      const updatedAportRange = getRegexMatch(portRangeRegex, updatedSidesArray[0]);
-      const updatedZportRange = getRegexMatch(portRangeRegex, updatedSidesArray[1]);
+      const updatedAportRange = getRegexMatch(
+        portRangeRegex,
+        updatedSidesArray[0]
+      );
+      const updatedZportRange = getRegexMatch(
+        portRangeRegex,
+        updatedSidesArray[1]
+      );
 
-      const updatedAportsArray = getSides(portsSeparatorRegex, updatedAportRange);
+      const updatedAportsArray = getSides(
+        portsSeparatorRegex,
+        updatedAportRange
+      );
       const updatedZportsArray = getSides(/-/gim, updatedZportRange);
-    
-      updatePorts(updatedAportsArray, updatedZportsArray);
 
-      calculatePortDifference(updatedAportsArray[0], updatedZportsArray[0]);
+      updatePorts(updatedAportsArray, updatedZportsArray);
+      setPortDifference(
+        calculatePortDifference(updatedAportsArray[0], updatedZportsArray[0])
+      );
     }
   };
 
   const calculatePortDifference = (a, b) => {
-    setPortDifference(Math.abs(parseInt(a)-parseInt(b)));
-  }
+    return Math.abs(parseInt(a) - parseInt(b));
+  };
 
   useEffect(() => {
-    updateSides();
-    calculatePortDifference();
+    try {
+      updateFields();
+      calculatePortDifference();
+    } catch (e) {
+      console.log(e);
+    }
   }, [portRange]);
 
   return (
@@ -123,7 +137,9 @@ export default function Calculator() {
         <Grid container spacing={1}>
           <Grid item xs={12}>
             <Avatar className={classes.avatar}>Equinix Logo</Avatar>
-            {portDifference}
+            Port Difference:{portDifference}
+            OldAPort:{oldAsidePorts}
+            OldZPort:{oldZsidePorts}
           </Grid>
           <Grid item xs={12}>
             <Typography variant="h6">
