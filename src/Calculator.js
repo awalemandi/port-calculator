@@ -145,9 +145,6 @@ export default function Calculator() {
         <Grid container spacing={1}>
           <Grid item xs={12}>
             <Avatar className={classes.avatar}>Equinix Logo</Avatar>
-            Port Difference:{portDifference}
-            OldAPort:{oldAsidePorts}
-            OldZPort:{oldZsidePorts}
           </Grid>
           <Grid item xs={12}>
             <Typography variant="h6">
@@ -279,6 +276,11 @@ export default function Calculator() {
               fullWidth
               disabled
             />
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant="h7">
+              Port difference: {portDifference}
+            </Typography>
           </Grid>
         </Grid>
 
