@@ -67,8 +67,8 @@ export default function Calculator() {
   const [zSidePatchpanel, setZsidePatchpanel] = useState("Z side PP");
   const [oldAsidePorts, setOldAsidePorts] = useState(["000", "000"]);
   const [oldZsidePorts, setOldZsidePorts] = useState(["000", "000"]);
-  const [newAsidePorts, setNewAsidePorts] = useState(["000", "000"]);
-  const [newZsidePorts, setNewZsidePorts] = useState(["000", "000"]);
+  const [newAsidePorts, setNewAsidePorts] = useState([0, 0]);
+  const [newZsidePorts, setNewZsidePorts] = useState([0, 0]);
   const [portDifference, setPortDifference] = useState(0);
 
   const handleRangeChange = e => {
@@ -121,6 +121,14 @@ export default function Calculator() {
     return Math.abs(parseInt(a) - parseInt(b));
   };
 
+  const handlePortAChange = e => {
+    setNewAsidePorts([parseInt(e.target.value), parseInt(e.target.value) + 1]);
+  };
+
+  const handlePortBChange = e => {
+    setNewAsidePorts([parseInt(e.target.value) - 1, parseInt(e.target.value)]);
+  };
+
   useEffect(() => {
     try {
       updateFields();
@@ -128,7 +136,7 @@ export default function Calculator() {
     } catch (e) {
       console.log(e);
     }
-  }, [portRange]);
+  }, [portRange, newAsidePorts]);
 
   return (
     <Container component="main" maxWidth="md">
@@ -285,7 +293,10 @@ export default function Calculator() {
               color="secondary"
               name="aSidePortA"
               variant="outlined"
-              value={newAsidePorts[0]}
+              value={
+                newAsidePorts[0] && newAsidePorts[0] >= 0 ? newAsidePorts[0] : 0
+              }
+              onChange={handlePortAChange}
               type="number"
               fullWidth
             />
@@ -296,7 +307,10 @@ export default function Calculator() {
               color="primary"
               name="aSidePortB"
               variant="outlined"
-              value={newAsidePorts[1]}
+              value={
+                newAsidePorts[1] && newAsidePorts[1] >= 0 ? newAsidePorts[1] : 0
+              }
+              onChange={handlePortBChange}
               type="number"
               fullWidth
             />
@@ -310,7 +324,11 @@ export default function Calculator() {
               color="primary"
               name="zSidePortA"
               variant="outlined"
-              value={newZsidePorts[0]}
+              value={
+                newAsidePorts[0] && newAsidePorts[0] > 0
+                  ? newAsidePorts[0] + portDifference
+                  : 0
+              }
               fullWidth
             />
           </Grid>
@@ -320,7 +338,11 @@ export default function Calculator() {
               color="primary"
               name="zSidePortB"
               variant="outlined"
-              value={newZsidePorts[1]}
+              value={
+                newAsidePorts[1] && newAsidePorts[1] > 0
+                  ? newAsidePorts[1] + portDifference
+                  : 0
+              }
               fullWidth
             />
           </Grid>
