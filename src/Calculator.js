@@ -86,6 +86,7 @@ export default function Calculator() {
   };
 
   const updateFields = () => {
+    if (portRange == "") return;
     let updatedSidesArray = getSides(rangeSeparatorRegex, portRange);
     if (updatedSidesArray) {
       setSidesArray(updatedSidesArray);
@@ -114,7 +115,7 @@ export default function Calculator() {
       setPortDifference(
         calculatePortDifference(updatedAportsArray[0], updatedZportsArray[0])
       );
-    }
+    } else return;
   };
 
   const calculatePortDifference = (a, b) => {
@@ -180,7 +181,7 @@ export default function Calculator() {
               color="secondary"
               name="aSidePortRange"
               variant="outlined"
-              value={sidesArray[0]}
+              value={sidesArray ? sidesArray[0] : "A side"}
               required
               fullWidth
               disabled
@@ -195,7 +196,7 @@ export default function Calculator() {
               color="secondary"
               name="zSidePortRange"
               variant="outlined"
-              value={sidesArray[1]}
+              value={sidesArray ? sidesArray[1] : "Z side"}
               required
               fullWidth
               disabled
@@ -211,7 +212,7 @@ export default function Calculator() {
               color="secondary"
               name="aSidePatchpanel"
               variant="outlined"
-              value={aSidePatchpanel}
+              value={aSidePatchpanel ? aSidePatchpanel : "A side PP"}
               disabled
               fullWidth
             />
@@ -225,7 +226,7 @@ export default function Calculator() {
               color="secondary"
               name="zSidePatchpanel"
               variant="outlined"
-              value={zSidePatchpanel}
+              value={zSidePatchpanel ? zSidePatchpanel : "Z side PP"}
               fullWidth
               disabled
             />
@@ -241,7 +242,7 @@ export default function Calculator() {
               color="secondary"
               name="aSidePortA"
               variant="outlined"
-              value={oldAsidePorts[0]}
+              value={oldAsidePorts ? oldAsidePorts[0] : "000"}
               fullWidth
               disabled
             />
@@ -252,7 +253,7 @@ export default function Calculator() {
               color="secondary"
               name="aSidePortB"
               variant="outlined"
-              value={oldAsidePorts[1]}
+              value={oldAsidePorts ? oldAsidePorts[1] : "000"}
               fullWidth
               disabled
             />
@@ -266,7 +267,7 @@ export default function Calculator() {
               color="secondary"
               name="zSidePortA"
               variant="outlined"
-              value={oldZsidePorts[0]}
+              value={oldZsidePorts ? oldZsidePorts[0] : "000"}
               fullWidth
               disabled
             />
@@ -277,7 +278,7 @@ export default function Calculator() {
               color="secondary"
               name="zSidePortB"
               variant="outlined"
-              value={oldZsidePorts[1]}
+              value={oldZsidePorts ? oldZsidePorts[1] : "000"}
               fullWidth
               disabled
             />
@@ -345,6 +346,16 @@ export default function Calculator() {
               fullWidth
             />
           </Grid>
+
+          {/*<Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Typography variant="h6">
+                3. Copy new port range: {aSidePatchpanel}
+                {newPortA}+{newPortB} to {zSidePatchpanel}
+                {newPortA + portDifference}+{newPortB + portDifference}
+              </Typography>
+            </Grid>
+          </Grid>*/}
         </Grid>
       </div>
       <Box mt={5}>
