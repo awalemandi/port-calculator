@@ -20,7 +20,7 @@ import {
   Container
 } from "@material-ui/core";
 
-// import wallpaper from "./images/sy5.jpg";
+import Logo from "./images/equinixLogo.png";
 
 //copyright
 function Copyright() {
@@ -46,9 +46,10 @@ const useStyles = makeStyles(theme => ({
   },
   logo: {
     margin: theme.spacing(1),
+    width: 100,
+    height: "auto"
   },
-  grid: {
-  },
+  grid: {},
   form: {
     width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(3)
@@ -164,7 +165,7 @@ export default function Calculator() {
     <div className={classes.paper}>
       <Grid container spacing={1} className={classes.grid}>
         <Grid item xs={12}>
-          <img src={} className={classes.logo} />
+          <img src="./images/equinixLogo.png" className={classes.logo} />
         </Grid>
         <Grid item xs={12}>
           <Typography variant="h6">
