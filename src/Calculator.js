@@ -20,7 +20,7 @@ import {
   Container
 } from "@material-ui/core";
 
-import wallpaper from ''
+// import wallpaper from "./images/sy5.jpg";
 
 //copyright
 function Copyright() {
@@ -40,11 +40,14 @@ function Copyright() {
 //styling
 const useStyles = makeStyles(theme => ({
   paper: {
-    
+    margin: 0,
+    width: "100%",
+    height: "100%"
   },
-  avatar: {
+  logo: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
+  },
+  grid: {
   },
   form: {
     width: "100%", // Fix IE 11 issue.
@@ -158,209 +161,207 @@ export default function Calculator() {
   }, [portRange]);
 
   return (
-    <Container component="main" maxWidth="md">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Grid container spacing={1}>
-          <Grid item xs={12}>
-            <Avatar className={classes.avatar}>Equinix Logo</Avatar>
-          </Grid>
-          <Grid item xs={12}>
-            <Typography variant="h6">
-              1. Paste structured cabling port range below:
-            </Typography>
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              color="secondary"
-              name="portRange"
-              variant="outlined"
-              value={portRange}
-              onChange={handleRangeChange}
-              required
-              fullWidth
-              placeholder="SY4:01:010105:0309:RU42R:001-048 to SY4:01:010050:1109-A:RU41:289-336"
-              autoFocus
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <Typography variant="h6">Port Range Template:</Typography>
-          </Grid>
-          <Grid item xs={12}>
-            <Typography variant="h7">A and Z sides:</Typography>
-          </Grid>
-          <Grid item xs={5}>
-            <TextField
-              color="secondary"
-              name="aSidePortRange"
-              variant="outlined"
-              value={sidesArray ? sidesArray[0] : "A side"}
-              required
-              fullWidth
-              disabled
-            />
-          </Grid>
-          <Grid item xs={1}>
-            <Typography variant="h6"> TO </Typography>
-          </Grid>
-
-          <Grid item xs={5}>
-            <TextField
-              color="secondary"
-              name="zSidePortRange"
-              variant="outlined"
-              value={sidesArray ? sidesArray[1] : "Z side"}
-              required
-              fullWidth
-              disabled
-            />
-          </Grid>
+    <div className={classes.paper}>
+      <Grid container spacing={1} className={classes.grid}>
+        <Grid item xs={12}>
+          <img src={} className={classes.logo} />
         </Grid>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <Typography variant="h7">Patch Panel:</Typography>
-          </Grid>
-          <Grid item xs={5}>
-            <TextField
-              color="secondary"
-              name="aSidePatchpanel"
-              variant="outlined"
-              value={aSidePatchpanel ? aSidePatchpanel : "A side PP"}
-              disabled
-              fullWidth
-            />
-          </Grid>
-          <Grid item xs={1}>
-            <Typography variant="h6"> TO </Typography>
-          </Grid>
-
-          <Grid item xs={5}>
-            <TextField
-              color="secondary"
-              name="zSidePatchpanel"
-              variant="outlined"
-              value={zSidePatchpanel ? zSidePatchpanel : "Z side PP"}
-              fullWidth
-              disabled
-            />
-          </Grid>
+        <Grid item xs={12}>
+          <Typography variant="h6">
+            1. Paste structured cabling port range below:
+          </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            color="secondary"
+            name="portRange"
+            variant="outlined"
+            value={portRange}
+            onChange={handleRangeChange}
+            required
+            fullWidth
+            placeholder="SY4:01:010105:0309:RU42R:001-048 to SY4:01:010050:1109-A:RU41:289-336"
+            autoFocus
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Typography variant="h6">Port Range Template:</Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <Typography variant="h7">A and Z sides:</Typography>
+        </Grid>
+        <Grid item xs={5}>
+          <TextField
+            color="secondary"
+            name="aSidePortRange"
+            variant="outlined"
+            value={sidesArray ? sidesArray[0] : "A side"}
+            required
+            fullWidth
+            disabled
+          />
+        </Grid>
+        <Grid item xs={1}>
+          <Typography variant="h6"> TO </Typography>
         </Grid>
 
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <Typography variant="h7">Ports:</Typography>
-          </Grid>
-          <Grid item xs={2}>
-            <TextField
-              color="secondary"
-              name="aSidePortA"
-              variant="outlined"
-              value={oldAsidePorts ? oldAsidePorts[0] : "000"}
-              fullWidth
-              disabled
-            />
-          </Grid>
-          <Typography variant="h6"> - </Typography>
-          <Grid item xs={2}>
-            <TextField
-              color="secondary"
-              name="aSidePortB"
-              variant="outlined"
-              value={oldAsidePorts ? oldAsidePorts[1] : "000"}
-              fullWidth
-              disabled
-            />
-          </Grid>
-          <Grid item xs={1}>
-            <Typography variant="h6"> TO </Typography>
-          </Grid>
-
-          <Grid item xs={2}>
-            <TextField
-              color="secondary"
-              name="zSidePortA"
-              variant="outlined"
-              value={oldZsidePorts ? oldZsidePorts[0] : "000"}
-              fullWidth
-              disabled
-            />
-          </Grid>
-          <Typography variant="h6"> - </Typography>
-          <Grid item xs={2}>
-            <TextField
-              color="secondary"
-              name="zSidePortB"
-              variant="outlined"
-              value={oldZsidePorts ? oldZsidePorts[1] : "000"}
-              fullWidth
-              disabled
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <Typography variant="h7">
-              Port difference: {portDifference}
-            </Typography>
-          </Grid>
+        <Grid item xs={5}>
+          <TextField
+            color="secondary"
+            name="zSidePortRange"
+            variant="outlined"
+            value={sidesArray ? sidesArray[1] : "Z side"}
+            required
+            fullWidth
+            disabled
+          />
+        </Grid>
+      </Grid>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Typography variant="h7">Patch Panel:</Typography>
+        </Grid>
+        <Grid item xs={5}>
+          <TextField
+            color="secondary"
+            name="aSidePatchpanel"
+            variant="outlined"
+            value={aSidePatchpanel ? aSidePatchpanel : "A side PP"}
+            disabled
+            fullWidth
+          />
+        </Grid>
+        <Grid item xs={1}>
+          <Typography variant="h6"> TO </Typography>
         </Grid>
 
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <Typography variant="h6">
-              2. Enter Port A to be calculated:
-            </Typography>
-          </Grid>
-          <Grid item xs={2}>
-            <TextField
-              color="secondary"
-              name="aSidePortA"
-              variant="outlined"
-              value={newPortA >= 0 ? newPortA : 0}
-              onChange={handlePortAChange}
-              type="number"
-              fullWidth
-            />
-          </Grid>
-          <Typography variant="h6"> + </Typography>
-          <Grid item xs={2}>
-            <TextField
-              color="primary"
-              name="aSidePortB"
-              variant="outlined"
-              value={newPortB >= 0 ? newPortB : 0}
-              onChange={handlePortBChange}
-              type="number"
-              fullWidth
-            />
-          </Grid>
-          <Grid item xs={1}>
-            <Typography variant="h6"> TO </Typography>
-          </Grid>
+        <Grid item xs={5}>
+          <TextField
+            color="secondary"
+            name="zSidePatchpanel"
+            variant="outlined"
+            value={zSidePatchpanel ? zSidePatchpanel : "Z side PP"}
+            fullWidth
+            disabled
+          />
+        </Grid>
+      </Grid>
 
-          <Grid item xs={2}>
-            <TextField
-              color="primary"
-              name="zSidePortA"
-              variant="outlined"
-              value={newPortA ? newPortA + portDifference : 0}
-              type="number"
-              fullWidth
-              disabled
-            />
-          </Grid>
-          <Typography variant="h6"> + </Typography>
-          <Grid item xs={2}>
-            <TextField
-              color="primary"
-              name="zSidePortB"
-              variant="outlined"
-              value={newPortB ? newPortB + portDifference : 0}
-              type="number"
-              disabled
-              fullWidth
-            />
-          </Grid>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Typography variant="h7">Ports:</Typography>
+        </Grid>
+        <Grid item xs={2}>
+          <TextField
+            color="secondary"
+            name="aSidePortA"
+            variant="outlined"
+            value={oldAsidePorts ? oldAsidePorts[0] : "000"}
+            fullWidth
+            disabled
+          />
+        </Grid>
+        <Typography variant="h6"> - </Typography>
+        <Grid item xs={2}>
+          <TextField
+            color="secondary"
+            name="aSidePortB"
+            variant="outlined"
+            value={oldAsidePorts ? oldAsidePorts[1] : "000"}
+            fullWidth
+            disabled
+          />
+        </Grid>
+        <Grid item xs={1}>
+          <Typography variant="h6"> TO </Typography>
+        </Grid>
 
-          {/*<Grid container spacing={2}>
+        <Grid item xs={2}>
+          <TextField
+            color="secondary"
+            name="zSidePortA"
+            variant="outlined"
+            value={oldZsidePorts ? oldZsidePorts[0] : "000"}
+            fullWidth
+            disabled
+          />
+        </Grid>
+        <Typography variant="h6"> - </Typography>
+        <Grid item xs={2}>
+          <TextField
+            color="secondary"
+            name="zSidePortB"
+            variant="outlined"
+            value={oldZsidePorts ? oldZsidePorts[1] : "000"}
+            fullWidth
+            disabled
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Typography variant="h7">
+            Port difference: {portDifference}
+          </Typography>
+        </Grid>
+      </Grid>
+
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Typography variant="h6">
+            2. Enter Port A to be calculated:
+          </Typography>
+        </Grid>
+        <Grid item xs={2}>
+          <TextField
+            color="secondary"
+            name="aSidePortA"
+            variant="outlined"
+            value={newPortA >= 0 ? newPortA : 0}
+            onChange={handlePortAChange}
+            type="number"
+            fullWidth
+          />
+        </Grid>
+        <Typography variant="h6"> + </Typography>
+        <Grid item xs={2}>
+          <TextField
+            color="primary"
+            name="aSidePortB"
+            variant="outlined"
+            value={newPortB >= 0 ? newPortB : 0}
+            onChange={handlePortBChange}
+            type="number"
+            fullWidth
+          />
+        </Grid>
+        <Grid item xs={1}>
+          <Typography variant="h6"> TO </Typography>
+        </Grid>
+
+        <Grid item xs={2}>
+          <TextField
+            color="primary"
+            name="zSidePortA"
+            variant="outlined"
+            value={newPortA ? newPortA + portDifference : 0}
+            type="number"
+            fullWidth
+            disabled
+          />
+        </Grid>
+        <Typography variant="h6"> + </Typography>
+        <Grid item xs={2}>
+          <TextField
+            color="primary"
+            name="zSidePortB"
+            variant="outlined"
+            value={newPortB ? newPortB + portDifference : 0}
+            type="number"
+            disabled
+            fullWidth
+          />
+        </Grid>
+
+        {/*<Grid container spacing={2}>
             <Grid item xs={12}>
               <Typography variant="h6">
                 3. Copy new port range: {aSidePatchpanel}
@@ -369,11 +370,10 @@ export default function Calculator() {
               </Typography>
             </Grid>
           </Grid>*/}
-        </Grid>
-      </div>
+      </Grid>
       <Box mt={5}>
         <Copyright />
       </Box>
-    </Container>
+    </div>
   );
 }
