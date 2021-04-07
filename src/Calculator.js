@@ -71,6 +71,18 @@ export default function Calculator() {
   const [newPortB, setNewPortB] = useState(0);
   const [portDifference, setPortDifference] = useState(0);
 
+  const resetFields = () => {
+    //resets all fields to initial state other than portRange
+    setSidesArray(["A side", "Z side"]);
+    setAsidePatchpanel("A side PP");
+    setZsidePatchpanel("Z side PP");
+    setOldAsidePorts(["000", "000"]);
+    setOldZsidePorts(["000", "000"]);
+    setNewPortA(0);
+    setNewPortB(0);
+    setPortDifference(0);
+  };
+
   const handleRangeChange = e => {
     setPortRange(e.target.value);
   };
@@ -86,7 +98,9 @@ export default function Calculator() {
   };
 
   const updateFields = () => {
-    if (portRange == "") return;
+    if (portRange == "") {
+      resetFields();
+    }
     let updatedSidesArray = getSides(rangeSeparatorRegex, portRange);
     if (updatedSidesArray) {
       setSidesArray(updatedSidesArray);
@@ -142,7 +156,7 @@ export default function Calculator() {
     } catch (e) {
       console.log(e);
     }
-  }, [portRange, oldAsidePorts]);
+  }, [portRange]);
 
   return (
     <Container component="main" maxWidth="md">
