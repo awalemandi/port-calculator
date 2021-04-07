@@ -20,6 +20,8 @@ import {
   Container
 } from "@material-ui/core";
 
+import wallpaper from ''
+
 //copyright
 function Copyright() {
   return (
@@ -38,10 +40,7 @@ function Copyright() {
 //styling
 const useStyles = makeStyles(theme => ({
   paper: {
-    marginTop: theme.spacing(8)
-    // display: "flex",
-    // flexDirection: "column",
-    // alignItems: "flex-start"
+    
   },
   avatar: {
     margin: theme.spacing(1),
