@@ -182,14 +182,22 @@ export default function Calculator() {
   };
 
   const getNewPortRange = (aPatchpanel, aPortA, aPortB, zPatchpanel) => {
-    return `${aPatchpanel}${aPortA}+${aPortB} to ${zPatchpanel}${getNewZPort('A')}+${getNewZPort('B')}`;
+    let newRange = `${ aPatchpanel }${ padNumber(aPortA) }+${ padNumber(aPortB) } to ${ zPatchpanel }${ getNewZPort('A') }+${ getNewZPort('B') }`;
+    setNewPortRange(newRange);
   };
 
+  //adds zeros infront of new ports for naming convention
+  const padNumber = (num) => {
+    let paddedNum = ('000' + num).slice(-3);
+    return paddedNum;
+  };
+
+  //calculate new Z side ports based on new A side ports and port difference
   const getNewZPort = (port = 'A' | 'B') => {
-    if(port == 'A') {
+    if (port == 'A') {
       return newPortA ? newPortA + portDifference : 0;
     };
-    if(port == 'B') {
+    if (port == 'B') {
       return newPortB ? newPortB + portDifference : 0;
     };
   };
@@ -198,7 +206,7 @@ export default function Calculator() {
     try {
       updateFields();
       if (portRange !== "" && newPortA !== 0) {
-        setNewPortRange(getNewPortRange(aSidePatchpanel, newPortA, newPortB, zSidePatchpanel))
+        getNewPortRange(aSidePatchpanel, newPortA, newPortB, zSidePatchpanel);
       }
     } catch (e) {
       console.log(e);
