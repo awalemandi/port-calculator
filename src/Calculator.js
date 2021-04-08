@@ -21,9 +21,8 @@ import {
 import SettingsEthernetIcon from '@material-ui/icons/SettingsEthernet';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import Logo from './images/equinixLogo.png';
-import Background from './images/sy5.jpg';
 
-//copyright
+//copyright component
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -46,13 +45,14 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'stretch',
-    backgroundColor: theme.palette.secondary.light,
+    background: 'transparent',
+    // backgroundColor: theme.palette.secondary.light,
     width: "100%",
     height: "100%",
   },
   logo: {
-    margin: theme.spacing(2),
-    width: 200,
+    margin: theme.spacing(5),
+    width: 110,
     height: 'auto',
     alignContent: 'center',
   },
@@ -76,6 +76,9 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(4),
     maxWidth: 70,
     height: '100%'
+  },
+  copyright: {
+    marginLeft: '25%'
   }
 }));
 
@@ -279,7 +282,9 @@ export default function Calculator() {
             disabled
           />
         </Grid>
+        <Grid item xs={1} className={classes.separator}>
         <Typography variant="h6"> - </Typography>
+        </Grid>
         <Grid item xs={2}>
           <TextField
             color="secondary"
@@ -304,7 +309,9 @@ export default function Calculator() {
             disabled
           />
         </Grid>
+        <Grid item xs={1} className={classes.separator}>
         <Typography variant="h6"> - </Typography>
+        </Grid>
         <Grid item xs={2}>
           <TextField
             color="secondary"
@@ -316,7 +323,7 @@ export default function Calculator() {
           />
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="h6" color="textPrimary">
+          <Typography variant="h6" color="primary">
             Port difference: {portDifference}
           </Typography>
         </Grid>
@@ -337,7 +344,9 @@ export default function Calculator() {
             fullWidth
           />
         </Grid>
+        <Grid item xs={1} className={classes.separator}>
         <Typography variant="h6"> + </Typography>
+        </Grid>
         <Grid item xs={2}>
           <TextField
             color="primary"
@@ -364,7 +373,9 @@ export default function Calculator() {
             disabled
           />
         </Grid>
+        <Grid item xs={1} className={classes.separator}>
         <Typography variant="h6"> + </Typography>
+        </Grid>
         <Grid item xs={2}>
           <TextField
             color="primary"
