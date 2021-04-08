@@ -202,6 +202,11 @@ export default function Calculator() {
     };
   };
 
+  //copies new port range to clopboard
+  const copyToClipboard = input => {
+    navigator.clipboard.writeText(input);
+  };
+
   useEffect(() => {
     try {
       updateFields();
@@ -431,7 +436,7 @@ export default function Calculator() {
             />
           </Grid>
           <Grid item xs={2} className={classes.buttonContainer}>
-            <Button variant="contained" size="large" color="primary" className={classes.button}><FileCopyIcon /></Button>
+            <Button variant="contained" size="large" color="primary" className={classes.button} onClick={copyToClipboard(newPortRange)}><FileCopyIcon /></Button>
           </Grid>
         </Grid>
       </Grid>
