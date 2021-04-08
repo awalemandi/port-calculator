@@ -50,6 +50,9 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
     height: "100%",
   },
+  steps: {
+    marginBottom: theme.spacing(1)
+  },
   logo: {
     margin: theme.spacing(5),
     width: 110,
@@ -96,6 +99,7 @@ export default function Calculator() {
   const [newPortA, setNewPortA] = useState(0);
   const [newPortB, setNewPortB] = useState(0);
   const [portDifference, setPortDifference] = useState(0);
+  const [newPortRange, setNewPortRange] = useState("");
 
   const resetFields = () => {
     //resets all fields to initial state other than portRange
@@ -107,6 +111,7 @@ export default function Calculator() {
     setNewPortA(0);
     setNewPortB(0);
     setPortDifference(0);
+    setNewPortRange("");
   };
 
   const handleRangeChange = e => {
@@ -176,6 +181,10 @@ export default function Calculator() {
     setNewPortA(input - 1);
   };
 
+  const getNewPortRange = () => {
+
+  };
+
   useEffect(() => {
     try {
       updateFields();
@@ -190,7 +199,7 @@ export default function Calculator() {
 
         <img src={Logo} alt="Equinix logo" className={classes.logo} />
 
-        <Grid item xs={12}>
+        <Grid item xs={12} className={classes.steps}>
           <Typography variant="h6">
             1. Paste structured cabling port range below:
           </Typography>
@@ -283,7 +292,7 @@ export default function Calculator() {
           />
         </Grid>
         <Grid item xs={1} className={classes.separator}>
-        <Typography variant="h6"> - </Typography>
+          <Typography variant="h6"> - </Typography>
         </Grid>
         <Grid item xs={2}>
           <TextField
@@ -310,7 +319,7 @@ export default function Calculator() {
           />
         </Grid>
         <Grid item xs={1} className={classes.separator}>
-        <Typography variant="h6"> - </Typography>
+          <Typography variant="h6"> - </Typography>
         </Grid>
         <Grid item xs={2}>
           <TextField
@@ -328,7 +337,7 @@ export default function Calculator() {
           </Typography>
         </Grid>
 
-        <Grid item xs={12}>
+        <Grid item xs={12} className={classes.steps}>
           <Typography variant="h6">
             2. Enter Port A to be calculated:
           </Typography>
@@ -345,7 +354,7 @@ export default function Calculator() {
           />
         </Grid>
         <Grid item xs={1} className={classes.separator}>
-        <Typography variant="h6"> + </Typography>
+          <Typography variant="h6"> + </Typography>
         </Grid>
         <Grid item xs={2}>
           <TextField
@@ -374,7 +383,7 @@ export default function Calculator() {
           />
         </Grid>
         <Grid item xs={1} className={classes.separator}>
-        <Typography variant="h6"> + </Typography>
+          <Typography variant="h6"> + </Typography>
         </Grid>
         <Grid item xs={2}>
           <TextField
@@ -390,13 +399,14 @@ export default function Calculator() {
 
         <Grid item container spacing={1} direction="row" justifyContent="space-between" alignItems="center">
           <Grid item xs={10}>
-            <Typography variant="h6">
+            <Typography variant="h6" className={classes.steps}>
               3. Copy new port range:
               </Typography>
             <TextField
               color="primary"
-              name="newRange"
+              name="newPortRange"
               variant="outlined"
+              value={newPortRange}
               fullWidth
             />
           </Grid>
