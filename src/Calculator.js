@@ -181,17 +181,29 @@ export default function Calculator() {
     setNewPortA(input - 1);
   };
 
-  const getNewPortRange = () => {
+  const getNewPortRange = (aPatchpanel, aPortA, aPortB, zPatchpanel) => {
+    return `${aPatchpanel}${aPortA}+${aPortB} to ${zPatchpanel}${getNewZPort('A')}+${getNewZPort('B')}`;
+  };
 
+  const getNewZPort = (port = 'A' | 'B') => {
+    if(port == 'A') {
+      return newPortA ? newPortA + portDifference : 0;
+    };
+    if(port == 'B') {
+      return newPortB ? newPortB + portDifference : 0;
+    };
   };
 
   useEffect(() => {
     try {
       updateFields();
+      if (portRange !== "" && newPortA !== 0) {
+        setNewPortRange(getNewPortRange(aSidePatchpanel, newPortA, newPortB, zSidePatchpanel))
+      }
     } catch (e) {
       console.log(e);
     }
-  }, [portRange]);
+  }, [portRange, newPortA, newPortB]);
 
   return (
     <div className={classes.paper}>
@@ -376,7 +388,7 @@ export default function Calculator() {
             color="primary"
             name="zSidePortA"
             variant="outlined"
-            value={newPortA ? newPortA + portDifference : 0}
+            value={getNewZPort('A')}
             type="number"
             fullWidth
             disabled
@@ -390,7 +402,7 @@ export default function Calculator() {
             color="primary"
             name="zSidePortB"
             variant="outlined"
-            value={newPortB ? newPortB + portDifference : 0}
+            value={getNewZPort('B')}
             type="number"
             disabled
             fullWidth
