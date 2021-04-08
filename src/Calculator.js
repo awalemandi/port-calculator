@@ -20,7 +20,7 @@ import {
   Container
 } from "@material-ui/core";
 
-import Logo from "./images/equinixLogo.png";
+import Logo from './images/equinixLogo.png';
 
 //copyright
 function Copyright() {
@@ -46,8 +46,7 @@ const useStyles = makeStyles(theme => ({
   },
   logo: {
     margin: theme.spacing(1),
-    width: 100,
-    height: "auto"
+    height: 50
   },
   grid: {},
   form: {
@@ -165,7 +164,7 @@ export default function Calculator() {
     <div className={classes.paper}>
       <Grid container spacing={1} className={classes.grid}>
         <Grid item xs={12}>
-          <img src="./images/equinixLogo.png" className={classes.logo} />
+          <img src={Logo} alt="Equinix logo" />
         </Grid>
         <Grid item xs={12}>
           <Typography variant="h6">
