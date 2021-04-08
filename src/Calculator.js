@@ -9,18 +9,19 @@ import {
 } from "./Regex";
 
 import {
-  Avatar,
-  CssBaseline,
+  Button,
   TextField,
   Link,
   Grid,
   Box,
   Typography,
   makeStyles,
-  Container
 } from "@material-ui/core";
 
+import SettingsEthernetIcon from '@material-ui/icons/SettingsEthernet';
+import FileCopyIcon from '@material-ui/icons/FileCopy';
 import Logo from './images/equinixLogo.png';
+import Background from './images/sy5.jpg';
 
 //copyright
 function Copyright() {
@@ -41,20 +42,40 @@ function Copyright() {
 const useStyles = makeStyles(theme => ({
   paper: {
     margin: 0,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'stretch',
+    backgroundColor: theme.palette.secondary.light,
     width: "100%",
-    height: "100%"
+    height: "100%",
   },
   logo: {
-    margin: theme.spacing(1),
-    height: 50
+    margin: theme.spacing(2),
+    width: 200,
+    height: 'auto',
+    alignContent: 'center',
   },
-  grid: {},
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(3)
+  container: {
+    width: '50%',
+    alignSelf: 'center',
+    [theme.breakpoints.down('md')]: {
+      width: '70%'
+    },
+    [theme.breakpoints.down('sm')]: {
+      width: '90%'
+    },
   },
-  submit: {
-    margin: theme.spacing(3, 0, 2)
+  separator: {
+    textAlign: 'center'
+  },
+  buttonContainer: {
+    textAlign: 'center'
+  },
+  button: {
+    marginTop: theme.spacing(4),
+    maxWidth: 70,
+    height: '100%'
   }
 }));
 
@@ -162,10 +183,10 @@ export default function Calculator() {
 
   return (
     <div className={classes.paper}>
-      <Grid container spacing={1} className={classes.grid}>
-        <Grid item xs={12}>
-          <img src={Logo} alt="Equinix logo" />
-        </Grid>
+      <Grid container spacing={1} flexDirection="column" justify="space-evenly" alignItems="center" className={classes.container}>
+
+        <img src={Logo} alt="Equinix logo" className={classes.logo} />
+
         <Grid item xs={12}>
           <Typography variant="h6">
             1. Paste structured cabling port range below:
@@ -173,7 +194,7 @@ export default function Calculator() {
         </Grid>
         <Grid item xs={12}>
           <TextField
-            color="secondary"
+            color="primary"
             name="portRange"
             variant="outlined"
             value={portRange}
@@ -185,10 +206,10 @@ export default function Calculator() {
           />
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="h6">Port Range Template:</Typography>
+          <Typography variant="h6" color="textSecondary">Port Range Template:</Typography>
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="h7">A and Z sides:</Typography>
+          <Typography variant="subtitle1" color="textSecondary">A and Z sides:</Typography>
         </Grid>
         <Grid item xs={5}>
           <TextField
@@ -201,8 +222,8 @@ export default function Calculator() {
             disabled
           />
         </Grid>
-        <Grid item xs={1}>
-          <Typography variant="h6"> TO </Typography>
+        <Grid item xs={2} className={classes.separator}>
+          <SettingsEthernetIcon />
         </Grid>
 
         <Grid item xs={5}>
@@ -216,10 +237,9 @@ export default function Calculator() {
             disabled
           />
         </Grid>
-      </Grid>
-      <Grid container spacing={2}>
+
         <Grid item xs={12}>
-          <Typography variant="h7">Patch Panel:</Typography>
+          <Typography variant="subtitle1" color="textSecondary">Patch Panel:</Typography>
         </Grid>
         <Grid item xs={5}>
           <TextField
@@ -231,8 +251,8 @@ export default function Calculator() {
             fullWidth
           />
         </Grid>
-        <Grid item xs={1}>
-          <Typography variant="h6"> TO </Typography>
+        <Grid item xs={2} className={classes.separator}>
+          <SettingsEthernetIcon />
         </Grid>
 
         <Grid item xs={5}>
@@ -245,11 +265,9 @@ export default function Calculator() {
             disabled
           />
         </Grid>
-      </Grid>
 
-      <Grid container spacing={2}>
         <Grid item xs={12}>
-          <Typography variant="h7">Ports:</Typography>
+          <Typography variant="subtitle1" color="textSecondary">Ports:</Typography>
         </Grid>
         <Grid item xs={2}>
           <TextField
@@ -272,8 +290,8 @@ export default function Calculator() {
             disabled
           />
         </Grid>
-        <Grid item xs={1}>
-          <Typography variant="h6"> TO </Typography>
+        <Grid item xs={2} className={classes.separator}>
+          <SettingsEthernetIcon />
         </Grid>
 
         <Grid item xs={2}>
@@ -298,13 +316,11 @@ export default function Calculator() {
           />
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="h7">
+          <Typography variant="h6" color="textPrimary">
             Port difference: {portDifference}
           </Typography>
         </Grid>
-      </Grid>
 
-      <Grid container spacing={2}>
         <Grid item xs={12}>
           <Typography variant="h6">
             2. Enter Port A to be calculated:
@@ -312,7 +328,7 @@ export default function Calculator() {
         </Grid>
         <Grid item xs={2}>
           <TextField
-            color="secondary"
+            color="primary"
             name="aSidePortA"
             variant="outlined"
             value={newPortA >= 0 ? newPortA : 0}
@@ -333,8 +349,8 @@ export default function Calculator() {
             fullWidth
           />
         </Grid>
-        <Grid item xs={1}>
-          <Typography variant="h6"> TO </Typography>
+        <Grid item xs={2} className={classes.separator}>
+          <SettingsEthernetIcon />
         </Grid>
 
         <Grid item xs={2}>
@@ -361,17 +377,24 @@ export default function Calculator() {
           />
         </Grid>
 
-        {/*<Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Typography variant="h6">
-                3. Copy new port range: {aSidePatchpanel}
-                {newPortA}+{newPortB} to {zSidePatchpanel}
-                {newPortA + portDifference}+{newPortB + portDifference}
+        <Grid item container spacing={1} direction="row" justifyContent="space-between" alignItems="center">
+          <Grid item xs={10}>
+            <Typography variant="h6">
+              3. Copy new port range:
               </Typography>
-            </Grid>
-          </Grid>*/}
+            <TextField
+              color="primary"
+              name="newRange"
+              variant="outlined"
+              fullWidth
+            />
+          </Grid>
+          <Grid item xs={2} className={classes.buttonContainer}>
+            <Button variant="contained" size="large" color="primary" className={classes.button}><FileCopyIcon /></Button>
+          </Grid>
+        </Grid>
       </Grid>
-      <Box mt={5}>
+      <Box className={classes.copyright}>
         <Copyright />
       </Box>
     </div>
