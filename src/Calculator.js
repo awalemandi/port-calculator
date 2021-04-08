@@ -60,7 +60,7 @@ const useStyles = makeStyles(theme => ({
     alignContent: 'center',
   },
   container: {
-    width: '50%',
+    width: '45%',
     alignSelf: 'center',
     [theme.breakpoints.down('md')]: {
       width: '70%'
@@ -81,7 +81,7 @@ const useStyles = makeStyles(theme => ({
     height: '100%'
   },
   copyright: {
-    marginLeft: '25%'
+    margin: theme.spacing(3)
   }
 }));
 
