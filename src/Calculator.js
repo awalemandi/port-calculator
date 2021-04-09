@@ -16,11 +16,16 @@ import {
   Box,
   Typography,
   makeStyles,
+  Tooltip,
+  Snackbar
 } from "@material-ui/core";
 
-import SettingsEthernetIcon from '@material-ui/icons/SettingsEthernet';
-import FileCopyIcon from '@material-ui/icons/FileCopy';
-import Logo from './images/equinixLogo.png';
+import SettingsEthernetIcon from "@material-ui/icons/SettingsEthernet";
+import FileCopyIcon from "@material-ui/icons/FileCopy";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
+
+import Logo from "./images/equinixLogo.png";
 
 //copyright component
 function Copyright() {
@@ -41,14 +46,14 @@ function Copyright() {
 const useStyles = makeStyles(theme => ({
   paper: {
     margin: 0,
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    alignItems: 'stretch',
-    background: 'transparent',
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    alignItems: "stretch",
+    background: "transparent",
     // backgroundColor: theme.palette.secondary.light,
     width: "100%",
-    height: "100%",
+    height: "100%"
   },
   steps: {
     marginBottom: theme.spacing(1)
@@ -56,29 +61,29 @@ const useStyles = makeStyles(theme => ({
   logo: {
     margin: theme.spacing(5),
     width: 110,
-    height: 'auto',
-    alignContent: 'center',
+    height: "auto",
+    alignContent: "center"
   },
   container: {
-    width: '45%',
-    alignSelf: 'center',
-    [theme.breakpoints.down('md')]: {
-      width: '70%'
+    width: "45%",
+    alignSelf: "center",
+    [theme.breakpoints.down("md")]: {
+      width: "70%"
     },
-    [theme.breakpoints.down('sm')]: {
-      width: '90%'
-    },
+    [theme.breakpoints.down("sm")]: {
+      width: "90%"
+    }
   },
   separator: {
-    textAlign: 'center'
+    textAlign: "center"
   },
   buttonContainer: {
-    textAlign: 'center'
+    textAlign: "center"
   },
   button: {
     marginTop: theme.spacing(4),
     maxWidth: 70,
-    height: '100%'
+    height: "100%"
   },
   copyright: {
     margin: theme.spacing(3)
@@ -100,6 +105,8 @@ export default function Calculator() {
   const [newPortB, setNewPortB] = useState(0);
   const [portDifference, setPortDifference] = useState(0);
   const [newPortRange, setNewPortRange] = useState("");
+
+  const [open, setOpen] = useState(false);
 
   const resetFields = () => {
     //resets all fields to initial state other than portRange
@@ -182,29 +189,43 @@ export default function Calculator() {
   };
 
   const getNewPortRange = (aPatchpanel, aPortA, aPortB, zPatchpanel) => {
-    let newRange = `${ aPatchpanel }${ padNumber(aPortA) }+${ padNumber(aPortB) } to ${ zPatchpanel }${ getNewZPort('A') }+${ getNewZPort('B') }`;
+    let newRange = `${aPatchpanel}${padNumber(aPortA)}+${padNumber(
+      aPortB
+    )} to ${zPatchpanel}${getNewZPort("A")}+${getNewZPort("B")}`;
     setNewPortRange(newRange);
   };
 
   //adds zeros infront of new ports for naming convention
-  const padNumber = (num) => {
-    let paddedNum = ('000' + num).slice(-3);
+  const padNumber = num => {
+    let paddedNum = ("000" + num).slice(-3);
     return paddedNum;
   };
 
   //calculate new Z side ports based on new A side ports and port difference
-  const getNewZPort = (port = 'A' | 'B') => {
-    if (port == 'A') {
+  const getNewZPort = (port = "A" | "B") => {
+    if (port == "A") {
       return newPortA ? newPortA + portDifference : 0;
-    };
-    if (port == 'B') {
+    }
+    if (port == "B") {
       return newPortB ? newPortB + portDifference : 0;
-    };
+    }
   };
 
   //copies new port range to clopboard
   const copyToClipboard = input => {
     navigator.clipboard.writeText(input);
+  };
+
+  const openSnack = () => {
+    setOpen(true);
+  };
+
+  const closeSnack = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
   };
 
   useEffect(() => {
@@ -220,8 +241,14 @@ export default function Calculator() {
 
   return (
     <div className={classes.paper}>
-      <Grid container spacing={1} flexDirection="column" justify="space-evenly" alignItems="center" className={classes.container}>
-
+      <Grid
+        container
+        spacing={1}
+        flexDirection="column"
+        justify="space-evenly"
+        alignItems="center"
+        className={classes.container}
+      >
         <img src={Logo} alt="Equinix logo" className={classes.logo} />
 
         <Grid item xs={12} className={classes.steps}>
@@ -243,10 +270,14 @@ export default function Calculator() {
           />
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="h6" color="textSecondary">Port Range Template:</Typography>
+          <Typography variant="h6" color="textSecondary">
+            Port Range Template:
+          </Typography>
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="subtitle1" color="textSecondary">A and Z sides:</Typography>
+          <Typography variant="subtitle1" color="textSecondary">
+            A and Z sides:
+          </Typography>
         </Grid>
         <Grid item xs={5}>
           <TextField
@@ -276,7 +307,9 @@ export default function Calculator() {
         </Grid>
 
         <Grid item xs={12}>
-          <Typography variant="subtitle1" color="textSecondary">Patch Panel:</Typography>
+          <Typography variant="subtitle1" color="textSecondary">
+            Patch Panel:
+          </Typography>
         </Grid>
         <Grid item xs={5}>
           <TextField
@@ -304,7 +337,9 @@ export default function Calculator() {
         </Grid>
 
         <Grid item xs={12}>
-          <Typography variant="subtitle1" color="textSecondary">Ports:</Typography>
+          <Typography variant="subtitle1" color="textSecondary">
+            Ports:
+          </Typography>
         </Grid>
         <Grid item xs={2}>
           <TextField
@@ -401,7 +436,7 @@ export default function Calculator() {
             color="primary"
             name="zSidePortA"
             variant="outlined"
-            value={getNewZPort('A')}
+            value={getNewZPort("A")}
             type="number"
             fullWidth
             disabled
@@ -415,18 +450,25 @@ export default function Calculator() {
             color="primary"
             name="zSidePortB"
             variant="outlined"
-            value={getNewZPort('B')}
+            value={getNewZPort("B")}
             type="number"
             disabled
             fullWidth
           />
         </Grid>
 
-        <Grid item container spacing={1} direction="row" justifyContent="space-between" alignItems="center">
+        <Grid
+          item
+          container
+          spacing={1}
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+        >
           <Grid item xs={10}>
             <Typography variant="h6" className={classes.steps}>
               3. Copy new port range:
-              </Typography>
+            </Typography>
             <TextField
               color="primary"
               name="newPortRange"
@@ -436,10 +478,45 @@ export default function Calculator() {
             />
           </Grid>
           <Grid item xs={2} className={classes.buttonContainer}>
-            <Button variant="contained" size="large" color="primary" className={classes.button} onClick={copyToClipboard(newPortRange)}><FileCopyIcon /></Button>
+            <Tooltip title="Copy to clipboard">
+              <Button
+                variant="contained"
+                size="large"
+                color="primary"
+                className={classes.button}
+                onClick={() => {
+                  copyToClipboard(newPortRange);
+                  openSnack();
+                }}
+              >
+                <FileCopyIcon />
+              </Button>
+            </Tooltip>
           </Grid>
         </Grid>
       </Grid>
+
+      <Snackbar
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "right"
+        }}
+        open={open}
+        autoHideDuration={3000}
+        onClose={closeSnack}
+        message="Copied to clipboard!"
+        action={
+          <IconButton
+            size="small"
+            aria-label="close"
+            color="primary"
+            onClick={closeSnack}
+          >
+            <CloseIcon fontSize="small" />
+          </IconButton>
+        }
+      />
+
       <Box className={classes.copyright}>
         <Copyright />
       </Box>
