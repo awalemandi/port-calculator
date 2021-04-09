@@ -171,6 +171,7 @@ export default function Calculator() {
   };
 
   const calculatePortDifference = (a, b) => {
+    if (a == b) return 0;
     const difference = Math.abs(parseInt(a) - parseInt(b));
     if (!difference) return;
     return difference;
@@ -191,7 +192,7 @@ export default function Calculator() {
   const getNewPortRange = (aPatchpanel, aPortA, aPortB, zPatchpanel) => {
     let newRange = `${aPatchpanel}${padNumber(aPortA)}+${padNumber(
       aPortB
-    )} to ${zPatchpanel}${getNewZPort("A")}+${getNewZPort("B")}`;
+    )} to ${zPatchpanel}${padNumber(getNewZPort("A"))}+${padNumber(getNewZPort("B"))}`;
     setNewPortRange(newRange);
   };
 
