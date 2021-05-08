@@ -15,11 +15,15 @@ import {
   Grid,
   Box,
   Typography,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
   makeStyles,
   Tooltip,
   Snackbar
 } from "@material-ui/core";
 
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import SettingsEthernetIcon from "@material-ui/icons/SettingsEthernet";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 import IconButton from "@material-ui/core/IconButton";
@@ -51,15 +55,14 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "space-between",
     alignItems: "stretch",
     background: "transparent",
-    // backgroundColor: theme.palette.secondary.light,
     width: "100%",
-    height: "100%"
+    height: "100vh"
   },
   steps: {
-    marginBottom: theme.spacing(1)
+    marginTop: theme.spacing(3)
   },
   logo: {
-    margin: theme.spacing(5),
+    margin: theme.spacing(8, 0, 2, 0),
     width: 110,
     height: "auto",
     alignContent: "center"
@@ -86,7 +89,7 @@ const useStyles = makeStyles(theme => ({
     height: "100%"
   },
   copyright: {
-    margin: theme.spacing(3)
+    margin: theme.spacing(1, 1, 2, 1)
   }
 }));
 
@@ -188,9 +191,9 @@ export default function Calculator() {
   };
 
   const getNewPortRange = (aPatchpanel, aPortA, aPortB, zPatchpanel) => {
-    let newRange = `${aPatchpanel}${padNumber(aPortA)}+${padNumber(
+    let newRange = `${ aPatchpanel }${ padNumber(aPortA) }+${ padNumber(
       aPortB
-    )} to ${zPatchpanel}${padNumber(getNewZPort("A"))}+${padNumber(getNewZPort("B"))}`;
+    ) } to ${ zPatchpanel }${ padNumber(getNewZPort("A")) }+${ padNumber(getNewZPort("B")) }`;
     setNewPortRange(newRange);
   };
 
@@ -268,132 +271,152 @@ export default function Calculator() {
             autoFocus
           />
         </Grid>
-        <Grid item xs={12}>
-          <Typography variant="h6" color="textSecondary">
-            Port Range Template:
-          </Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <Typography variant="subtitle1" color="textSecondary">
-            A and Z sides:
-          </Typography>
-        </Grid>
-        <Grid item xs={5}>
-          <TextField
-            color="secondary"
-            name="aSidePortRange"
-            variant="outlined"
-            value={sidesArray ? sidesArray[0] : "A side"}
-            required
-            fullWidth
-            disabled
-          />
-        </Grid>
-        <Grid item xs={2} className={classes.separator}>
-          <SettingsEthernetIcon />
-        </Grid>
-
-        <Grid item xs={5}>
-          <TextField
-            color="secondary"
-            name="zSidePortRange"
-            variant="outlined"
-            value={sidesArray ? sidesArray[1] : "Z side"}
-            required
-            fullWidth
-            disabled
-          />
-        </Grid>
 
         <Grid item xs={12}>
-          <Typography variant="subtitle1" color="textSecondary">
-            Patch Panel:
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <Typography variant="h6" color="textSecondary">
+                Current Port Range Template:
           </Typography>
-        </Grid>
-        <Grid item xs={5}>
-          <TextField
-            color="secondary"
-            name="aSidePatchpanel"
-            variant="outlined"
-            value={aSidePatchpanel ? aSidePatchpanel : "A side PP"}
-            disabled
-            fullWidth
-          />
-        </Grid>
-        <Grid item xs={2} className={classes.separator}>
-          <SettingsEthernetIcon />
-        </Grid>
 
-        <Grid item xs={5}>
-          <TextField
-            color="secondary"
-            name="zSidePatchpanel"
-            variant="outlined"
-            value={zSidePatchpanel ? zSidePatchpanel : "Z side PP"}
-            fullWidth
-            disabled
-          />
-        </Grid>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Grid
+                container
+                spacing={1}
+                flexDirection="column"
+                justify="space-evenly"
+                alignItems="center"
+              >
+                <Grid item xs={12}>
+                  <Typography variant="subtitle1" color="textSecondary">
+                    A and Z sides:
+                  </Typography>
+                </Grid>
+                <Grid item xs={5}>
+                  <TextField
+                    color="secondary"
+                    name="aSidePortRange"
+                    variant="outlined"
+                    value={sidesArray ? sidesArray[0] : "A side"}
+                    required
+                    fullWidth
+                    disabled
+                  />
+                </Grid>
+                <Grid item xs={2} className={classes.separator}>
+                  <SettingsEthernetIcon />
+                </Grid>
 
-        <Grid item xs={12}>
-          <Typography variant="subtitle1" color="textSecondary">
-            Ports:
-          </Typography>
-        </Grid>
-        <Grid item xs={2}>
-          <TextField
-            color="secondary"
-            name="aSidePortA"
-            variant="outlined"
-            value={oldAsidePorts ? oldAsidePorts[0] : "000"}
-            fullWidth
-            disabled
-          />
-        </Grid>
-        <Grid item xs={1} className={classes.separator}>
-          <Typography variant="h6"> - </Typography>
-        </Grid>
-        <Grid item xs={2}>
-          <TextField
-            color="secondary"
-            name="aSidePortB"
-            variant="outlined"
-            value={oldAsidePorts ? oldAsidePorts[1] : "000"}
-            fullWidth
-            disabled
-          />
-        </Grid>
-        <Grid item xs={2} className={classes.separator}>
-          <SettingsEthernetIcon />
-        </Grid>
+                <Grid item xs={5}>
+                  <TextField
+                    color="secondary"
+                    name="zSidePortRange"
+                    variant="outlined"
+                    value={sidesArray ? sidesArray[1] : "Z side"}
+                    required
+                    fullWidth
+                    disabled
+                  />
+                </Grid>
 
-        <Grid item xs={2}>
-          <TextField
-            color="secondary"
-            name="zSidePortA"
-            variant="outlined"
-            value={oldZsidePorts ? oldZsidePorts[0] : "000"}
-            fullWidth
-            disabled
-          />
-        </Grid>
-        <Grid item xs={1} className={classes.separator}>
-          <Typography variant="h6"> - </Typography>
-        </Grid>
-        <Grid item xs={2}>
-          <TextField
-            color="secondary"
-            name="zSidePortB"
-            variant="outlined"
-            value={oldZsidePorts ? oldZsidePorts[1] : "000"}
-            fullWidth
-            disabled
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <Typography variant="h6" color="primary">
-            Port difference: {portDifference}
-          </Typography>
+                <Grid item xs={12}>
+                  <Typography variant="subtitle1" color="textSecondary">
+                    Patch Panel:
+                  </Typography>
+                </Grid>
+                <Grid item xs={5}>
+                  <TextField
+                    color="secondary"
+                    name="aSidePatchpanel"
+                    variant="outlined"
+                    value={aSidePatchpanel ? aSidePatchpanel : "A side PP"}
+                    disabled
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={2} className={classes.separator}>
+                  <SettingsEthernetIcon />
+                </Grid>
+
+                <Grid item xs={5}>
+                  <TextField
+                    color="secondary"
+                    name="zSidePatchpanel"
+                    variant="outlined"
+                    value={zSidePatchpanel ? zSidePatchpanel : "Z side PP"}
+                    fullWidth
+                    disabled
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <Typography variant="subtitle1" color="textSecondary">
+                    Ports:
+                  </Typography>
+                </Grid>
+                <Grid item xs={2}>
+                  <TextField
+                    color="secondary"
+                    name="aSidePortA"
+                    variant="outlined"
+                    value={oldAsidePorts ? oldAsidePorts[0] : "000"}
+                    fullWidth
+                    disabled
+                  />
+                </Grid>
+                <Grid item xs={1} className={classes.separator}>
+                  <Typography variant="h6"> - </Typography>
+                </Grid>
+                <Grid item xs={2}>
+                  <TextField
+                    color="secondary"
+                    name="aSidePortB"
+                    variant="outlined"
+                    value={oldAsidePorts ? oldAsidePorts[1] : "000"}
+                    fullWidth
+                    disabled
+                  />
+                </Grid>
+                <Grid item xs={2} className={classes.separator}>
+                  <SettingsEthernetIcon />
+                </Grid>
+
+                <Grid item xs={2}>
+                  <TextField
+                    color="secondary"
+                    name="zSidePortA"
+                    variant="outlined"
+                    value={oldZsidePorts ? oldZsidePorts[0] : "000"}
+                    fullWidth
+                    disabled
+                  />
+                </Grid>
+                <Grid item xs={1} className={classes.separator}>
+                  <Typography variant="h6"> - </Typography>
+                </Grid>
+                <Grid item xs={2}>
+                  <TextField
+                    color="secondary"
+                    name="zSidePortB"
+                    variant="outlined"
+                    value={oldZsidePorts ? oldZsidePorts[1] : "000"}
+                    fullWidth
+                    disabled
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <Typography variant="h6" color="primary">
+                    Port difference: {portDifference}
+                  </Typography>
+                </Grid>
+              </Grid>
+            </AccordionDetails>
+          </Accordion>
         </Grid>
 
         <Grid item xs={12} className={classes.steps}>
