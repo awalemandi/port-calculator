@@ -59,10 +59,10 @@ const useStyles = makeStyles(theme => ({
     height: "100vh"
   },
   steps: {
-    marginTop: theme.spacing(3)
+    marginTop: theme.spacing(1)
   },
   logo: {
-    margin: theme.spacing(8, 0, 2, 0),
+    margin: theme.spacing(6, 0, 3, 0),
     width: 110,
     height: "auto",
     alignContent: "center"
@@ -84,7 +84,7 @@ const useStyles = makeStyles(theme => ({
     textAlign: "center"
   },
   button: {
-    marginTop: theme.spacing(4),
+    marginTop: theme.spacing(0),
     maxWidth: 70,
     height: "100%"
   },
@@ -239,7 +239,7 @@ export default function Calculator() {
     } catch (e) {
       console.log(e);
     }
-  }, []);
+  }, [portRange, newPortA, newPortB]);
 
   return (
     <div className={classes.paper}>
@@ -272,7 +272,7 @@ export default function Calculator() {
           />
         </Grid>
 
-        <Grid item xs={12}>
+        <Grid item xs={12} className={classes.steps}>
           <Accordion>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
@@ -478,9 +478,14 @@ export default function Calculator() {
             fullWidth
           />
         </Grid>
-
+        <Grid item xs={12} className={classes.steps}>
+            <Typography variant="h6">
+              3. Copy new port range:
+            </Typography>
+        </Grid>
         <Grid
           item
+          xs={12}
           container
           spacing={1}
           direction="row"
@@ -488,9 +493,6 @@ export default function Calculator() {
           alignItems="center"
         >
           <Grid item xs={10}>
-            <Typography variant="h6" className={classes.steps}>
-              3. Copy new port range:
-            </Typography>
             <TextField
               color="primary"
               name="newPortRange"
