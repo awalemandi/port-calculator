@@ -136,9 +136,7 @@ export default function Calculator() {
   };
 
   const updateFields = () => {
-    if (portRange == "") {
-      resetFields();
-    }
+    if (portRange == "") resetFields();
     let updatedSidesArray = getSides(rangeSeparatorRegex, portRange);
     if (updatedSidesArray) {
       setSidesArray(updatedSidesArray);
@@ -212,7 +210,7 @@ export default function Calculator() {
     }
   };
 
-  //copies new port range to clopboard
+  //copies new port range to clipboard
   const copyToClipboard = input => {
     navigator.clipboard.writeText(input);
   };
@@ -238,7 +236,7 @@ export default function Calculator() {
     } catch (e) {
       console.log(e);
     }
-  }, [portRange, newPortA, newPortB]);
+  }, []);
 
   return (
     <div className={classes.paper}>
